@@ -38,6 +38,7 @@ def build_vcard(contact: ContactData) -> str:
         lines.append(f"EMAIL:{contact.email}")
     if contact.url:
         lines.append(f"URL:{contact.url}")
+    lines.append("NOTE:Met at Ars Electronica Futurelab Networking Event. 2026")
     lines.append("END:VCARD")
     return "\r\n".join(lines)
 
