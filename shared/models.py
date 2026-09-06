@@ -25,7 +25,9 @@ class ContactData:
 
 def build_vcard(contact: ContactData) -> str:
     """Render a vCard 3.0 text block from the collected fields."""
-    lines = ["BEGIN:VCARD", "VERSION:3.0", f"FN:{contact.name}"]
+    given, _, family = contact.name.strip().rpartition(" ")
+    # N is required by vCard 3.0; without it some contact apps show ORG as the title instead of FN.
+    lines = ["BEGIN:VCARD", "VERSION:3.0", f"N:{family};{given};;;", f"FN:{contact.name}"]
     if contact.company:
         lines.append(f"ORG:{contact.company}")
     if contact.position:
