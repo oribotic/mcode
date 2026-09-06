@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "mcode"
+version = "0.1.0"
+description = "Meet Code - GDPR contact QR kiosk: remote service + local print agent + shared builders"
+authors = []
+packages = [
+	{ include = "shared" },
+	{ include = "remote" },
+	{ include = "local_agent" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+qrcode = "^7.4"
+pillow = "^10.1"
+
+[tool.poetry.group.remote.dependencies]
+fastapi = "^0.111"
+uvicorn = { extras = ["standard"], version = "^0.30" }
+jinja2 = "^3.1"
+python-multipart = "^0.0.9"
+slowapi = "^0.1.9"
+
+[tool.poetry.group.remote]
+optional = true
+
+[tool.poetry.group.local.dependencies]
+requests = "^2.31"
+brother_ql = "^0.9"
+pyusb = "^1.2"
+python-dotenv = "^1.0"
+
+[tool.poetry.group.local]
+optional = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

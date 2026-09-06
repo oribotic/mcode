@@ -1,0 +1,12 @@
+services:
+  mcode-remote:
+    build:
+      context: ..
+      dockerfile: remote/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      AGENT_API_KEY: ${AGENT_API_KEY}
+    # pending_jobs.db is intentionally not persisted across restarts:
+    # jobs are transient by design (TTL-purged / deleted on ack).

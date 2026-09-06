@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Before we continue</h1>
+  <p>
+    We'd like to process your name, company, position, email, phone and URL to generate
+    a QR contact card and print it on a label. If you agree, this data is stored so the
+    label can be reprinted or looked up later. If you decline, your data is still used to
+    generate and print the label, but is not stored.
+  </p>
+  <div class="btn-row">
+    <a class="btn" href="/form?consent=1">Agree &amp; continue</a>
+    <a class="btn btn-secondary" href="/form?consent=0">Decline &amp; continue</a>
+  </div>
+{% endblock %}

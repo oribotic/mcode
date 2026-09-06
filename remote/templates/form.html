@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Your details</h1>
+  <form method="post" action="/submit">
+    <input type="hidden" name="consent" value="{{ consent }}">
+    <label>Name<input type="text" name="name" required></label>
+    <label>Company<input type="text" name="company"></label>
+    <label>Position<input type="text" name="position"></label>
+    <label>Email<input type="email" name="email"></label>
+    <label>Phone<input type="tel" name="phone"></label>
+    <label>URL<input type="url" name="url"></label>
+    <button class="btn" type="submit">Generate</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ name }}</h1>
+  <img class="qr" src="/qr/{{ job_id }}.png" alt="QR contact card">
+  <div class="btn-row">
+    <a class="btn" href="/qr/{{ job_id }}.png" download="{{ name }}.png">Save QR</a>
+  </div>
+  <p>Sending to the printer&hellip;</p>
+  <a class="btn btn-secondary" href="/">Done</a>
+{% endblock %}

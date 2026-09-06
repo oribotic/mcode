@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mcode.agent</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/mrg/Dropbox/git/mcode/.venv/bin/python</string>
+    <string>/Users/mrg/Dropbox/git/mcode/local_agent/agent.py</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/mrg/Dropbox/git/mcode</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/Users/mrg/Dropbox/git/mcode/local_agent/agent.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/mrg/Dropbox/git/mcode/local_agent/agent.log</string>
+</dict>
+</plist>
