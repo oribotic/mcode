@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import uuid
 
 from fastapi import FastAPI, Form, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse
@@ -81,9 +82,10 @@ async def submit(
         email=email.strip(), phone=phone.strip(), url=url.strip(),
         consent=consent == "1",
     )
-    vcard = build_vcard(contact)
+    job_id = uuid.uuid4().hex
+    vcard = build_vcard(contact, uid=job_id)
     qr_image = build_qr_image(vcard)
-    job_id = db.create_job(contact, qr_image)
+    db.create_job(job_id, contact, qr_image)
     return templates.TemplateResponse(request, "generate.html", {"job_id": job_id, "name": contact.name})
 
 

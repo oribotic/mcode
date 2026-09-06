@@ -5,7 +5,6 @@ import base64
 import io
 import sqlite3
 import time
-import uuid
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -42,8 +41,7 @@ def _connect():
         conn.close()
 
 
-def create_job(contact: ContactData, qr_image) -> str:
-    job_id = uuid.uuid4().hex
+def create_job(job_id: str, contact: ContactData, qr_image) -> None:
     buf = io.BytesIO()
     qr_image.save(buf, format="PNG")
     now = time.time()

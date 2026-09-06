@@ -23,11 +23,15 @@ class ContactData:
     consent: bool = False
 
 
-def build_vcard(contact: ContactData) -> str:
+def build_vcard(contact: ContactData, uid: str = "") -> str:
     """Render a vCard 3.0 text block from the collected fields."""
     given, _, family = contact.name.strip().rpartition(" ")
     # N is required by vCard 3.0; without it some contact apps show ORG as the title instead of FN.
     lines = ["BEGIN:VCARD", "VERSION:3.0", f"N:{family};{given};;;", f"FN:{contact.name}"]
+    if uid:
+        # Distinct UID per submission so contact apps add a new contact instead of merging into an
+        # existing one with the same name (which would silently drop fields like ORG).
+        lines.append(f"UID:{uid}")
     if contact.company:
         lines.append(f"ORG:{contact.company}")
     if contact.position:
