@@ -42,6 +42,7 @@ def _render() -> bytes:
   <meta charset="utf-8">
   <meta http-equiv="refresh" content="2">
   <title>mcode - network glue</title>
+  <h2>Scan this code to create your QR contact</h2>
   <style>
     body {{ font-family: sans-serif; margin: 2rem; background: #111; color: #eee; }}
     table {{ border-collapse: collapse; width: 100%; }}
@@ -50,7 +51,7 @@ def _render() -> bytes:
   </style>
 </head>
 <body>
-  <h1>Meet Code &mdash; Local Agent</h1>
+  <h1>mcode</h1>
   <p>Polling remote: <code>{escape(_remote_url)}</code></p>
   <p>Printer: <code>{escape(_printer_identifier)}</code></p>
   <img src="/qr.png" alt="QR code for remote URL" width="200" height="200">
