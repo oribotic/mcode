@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
@@ -10,6 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 LABEL_WIDTH_PX = 696
 LABEL_MARGIN_PX = 24
 LABEL_FONT_SIZE = 32
+LABEL_FONT_PATH = Path(__file__).parent / "fonts" / "IBMPlexSans-Medium.ttf"
 
 
 @dataclass
@@ -57,10 +59,14 @@ def build_qr_image(vcard_text: str) -> Image.Image:
 
 def _label_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     try:
-        return ImageFont.load_default(size=size)
-    except TypeError:
-        # Pillow < 10.1 load_default() has no size arg.
-        return ImageFont.load_default()
+        return ImageFont.truetype(str(LABEL_FONT_PATH), size)
+    except OSError:
+        # Bundled font missing - fall back rather than fail the print job.
+        try:
+            return ImageFont.load_default(size=size)
+        except TypeError:
+            # Pillow < 10.1 load_default() has no size arg.
+            return ImageFont.load_default()
 
 
 def compose_label(qr_image: Image.Image, name: str) -> Image.Image:

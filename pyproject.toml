@@ -29,7 +29,7 @@ requests = "^2.31"
 brother_ql = "^0.9"
 pyusb = "^1.2"
 python-dotenv = "^1.0"
-pypdf = "^5.0"
+pymupdf = "^1.24"
 
 [tool.poetry.group.local]
 optional = true

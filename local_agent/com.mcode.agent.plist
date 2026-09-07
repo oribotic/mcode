@@ -11,6 +11,11 @@
   </array>
   <key>WorkingDirectory</key>
   <string>/Users/mrg/Dropbox/git/mcode</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>DYLD_LIBRARY_PATH</key>
+    <string>/opt/homebrew/lib</string>
+  </dict>
   <key>RunAtLoad</key>
   <true/>
   <key>KeepAlive</key>

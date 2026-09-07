@@ -41,7 +41,7 @@ def _render() -> bytes:
 <head>
   <meta charset="utf-8">
   <meta http-equiv="refresh" content="2">
-  <title>Meet Code Agent Status</title>
+  <title>mcode - network glue</title>
   <style>
     body {{ font-family: sans-serif; margin: 2rem; background: #111; color: #eee; }}
     table {{ border-collapse: collapse; width: 100%; }}

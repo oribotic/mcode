@@ -1,0 +1,15 @@
+[Unit]
+Description=Meet Code local print agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__WORKDIR__
+Environment=PYTHONPATH=__WORKDIR__
+ExecStart=__VENV_PY__ local_agent/agent.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
