@@ -25,25 +25,35 @@ class ContactData:
     consent: bool = False
 
 
+def _vcard_escape(value: str) -> str:
+    """Escape vCard 3.0 special characters and strip CR/LF so a field can't inject extra lines."""
+    value = value.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+    return value.replace("\r\n", "\\n").replace("\n", "\\n").replace("\r", "\\n")
+
+
 def build_vcard(contact: ContactData, uid: str = "") -> str:
     """Render a vCard 3.0 text block from the collected fields."""
     given, _, family = contact.name.strip().rpartition(" ")
     # N is required by vCard 3.0; without it some contact apps show ORG as the title instead of FN.
-    lines = ["BEGIN:VCARD", "VERSION:3.0", f"N:{family};{given};;;", f"FN:{contact.name}"]
+    lines = [
+        "BEGIN:VCARD", "VERSION:3.0",
+        f"N:{_vcard_escape(family)};{_vcard_escape(given)};;;",
+        f"FN:{_vcard_escape(contact.name)}",
+    ]
     if uid:
         # Distinct UID per submission so contact apps add a new contact instead of merging into an
         # existing one with the same name (which would silently drop fields like ORG).
-        lines.append(f"UID:{uid}")
+        lines.append(f"UID:{_vcard_escape(uid)}")
     if contact.company:
-        lines.append(f"ORG:{contact.company}")
+        lines.append(f"ORG:{_vcard_escape(contact.company)}")
     if contact.position:
-        lines.append(f"TITLE:{contact.position}")
+        lines.append(f"TITLE:{_vcard_escape(contact.position)}")
     if contact.phone:
-        lines.append(f"TEL;TYPE=CELL:{contact.phone}")
+        lines.append(f"TEL;TYPE=CELL:{_vcard_escape(contact.phone)}")
     if contact.email:
-        lines.append(f"EMAIL:{contact.email}")
+        lines.append(f"EMAIL:{_vcard_escape(contact.email)}")
     if contact.url:
-        lines.append(f"URL:{contact.url}")
+        lines.append(f"URL:{_vcard_escape(contact.url)}")
     lines.append("NOTE:Met at Ars Electronica Futurelab Networking Event. 2026")
     lines.append("END:VCARD")
     return "\r\n".join(lines)

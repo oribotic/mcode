@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import hmac
 import os
 import uuid
 
@@ -42,7 +43,7 @@ async def start_purge_loop() -> None:
 
 
 def _require_agent_key(request: Request) -> None:
-    if request.headers.get("X-API-Key") != API_KEY:
+    if not hmac.compare_digest(request.headers.get("X-API-Key", ""), API_KEY):
         raise HTTPException(status_code=401, detail="invalid API key")
 
 
