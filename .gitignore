@@ -5,4 +5,5 @@ venv/
 .env
 *.db
 *.log
-*.pdf
+local_agent/print_previews/*.pdf
+local_agent/print_previews/printed/*.pdf
